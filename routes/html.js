@@ -14,16 +14,13 @@ var path = require("path");
 // In each of the below cases the user is shown an HTML page of content
 // ---------------------------------------------------------------------------
 
-router.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-
-router.get("/exercise.js", function (req, res) {
+router.get("/exercise", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/exercise.html"));
 });
 
 // If no matching route is found default to home
-router.get("/stats.js", function (req, res) {
+router.get("/stats", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/stats.html"));
 });
+
 module.exports = router;
