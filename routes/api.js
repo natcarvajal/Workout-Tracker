@@ -12,7 +12,7 @@ router.get("/api/workouts", ({ body }, res) => {
 });
 
 router.put("/api/workouts/:id", ({ body }, res) => {
-  Workout.create(body)
+  Workout.insertMany(body)
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
