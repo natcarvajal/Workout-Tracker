@@ -39,13 +39,23 @@ router.post("/api/workouts", ({ body }, res) => {
     });
 });
 router.get("/api/workouts/range", (req, res) => {
-  Workout.find({})
-    .sort({ date: -1 })
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: {
+          $sum: "$exercises.duration",
+        },
+      },
+    },
+  ])
+    .sort({ _id: -1 })
+    .limit(7)
+    .then((dbWorkouts) => {
+      console.log(dbWorkouts);
+      res.json(dbWorkouts);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.json(err);
     });
 });
 
